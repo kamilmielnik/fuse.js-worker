@@ -4,7 +4,7 @@
     "downlevelIteration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["esnext"],
+    "lib": ["esnext", "webworker"],
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitReturns": true,
