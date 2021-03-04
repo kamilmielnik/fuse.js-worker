@@ -1,0 +1,59 @@
+{
+  "name": "fuse.js-worker",
+  "version": "0.0.1",
+  "description": "Fuse.js in Web Worker for great user experience",
+  "keywords": [
+    "fuse.js",
+    "fuse",
+    "web worker",
+    "fuzzy",
+    "background",
+    "async",
+    "search",
+    "thread",
+    "typescript"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "main": "./build/index.js",
+  "license": "MIT",
+  "author": {
+    "name": "Kamil Mielnik",
+    "email": "kamil.adam.mielnik@gmail.com",
+    "url": "https://kamilmielnik.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamilmielnik/fuse.js-worker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kamilmielnik/fuse.js-worker/issues"
+  },
+  "homepage": "https://github.com/kamilmielnik/fuse.js-worker#readme",
+  "files": [
+    "build/**"
+  ],
+  "types": "./build/index.d.ts",
+  "np": {
+    "yarn": false
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "rimraf build",
+    "build": "tsc --project .",
+    "prettier": "prettier --list-different './src/**/*.{js,ts}'",
+    "prettier:fix": "npm run prettier:js -- --write --no-list-different",
+    "prebuild": "npm run clean",
+    "prerelease": "npm run build",
+    "release": "np --no-2fa"
+  },
+  "devDependencies": {
+    "np": "^7.0.0",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.1.3"
+  }
+}
