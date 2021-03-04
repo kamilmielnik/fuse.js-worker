@@ -1,6 +1,6 @@
 // TODO: if (!window.Worker)
 
-import { IdGenerator } from './lib';
+import { IdGenerator, poll } from './lib';
 import {
   FuseAdapterOptions,
   RequestMessage,
@@ -40,13 +40,16 @@ class FuseAdapter<T> {
 
     // TODO: add error handling (reject)
     const promise = new Promise<SearchResponseMessage<T>['payload']>((resolve) => {
-      let interval = global.setInterval(() => {
-        if (this.resolvedPromises.has(id)) {
-          const data = this.resolvedPromises.get(id)!;
-          global.clearInterval(interval);
-          this.resolvedPromises.delete(id);
-          resolve(data.payload);
+      poll(() => {
+        if (!this.resolvedPromises.has(id)) {
+          return true;
         }
+
+        const data = this.resolvedPromises.get(id)!;
+        this.resolvedPromises.delete(id);
+        resolve(data.payload);
+
+        return false;
       }, this.options.pollingTime);
     });
 
