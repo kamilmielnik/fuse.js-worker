@@ -45,7 +45,7 @@ class FuseAdapter<T> {
           return true;
         }
 
-        const data = this.resolvedPromises.get(id)!;
+        const data = this.resolvedPromises.get(id)! as SearchResponseMessage<T>;
         this.resolvedPromises.delete(id);
         resolve(data.payload);
 
@@ -61,7 +61,7 @@ class FuseAdapter<T> {
     this.worker.terminate();
   }
 
-  private postMessage(message: RequestMessage): void {
+  private postMessage(message: RequestMessage<T>): void {
     this.worker.postMessage(message);
   }
 }

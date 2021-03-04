@@ -4,15 +4,25 @@ export interface FuseAdapterOptions {
   pollingTime: number;
 }
 
-interface Message<Type extends string, Payload = never> {
+type BaseMessage<Type extends string> = {
   id: number;
-  payload: Payload;
   type: Type;
-}
+};
 
-export type ConstructRequestMessage = Message<'construct-request'>;
+type Message<Type extends string, Payload = void> = Payload extends void
+  ? BaseMessage<Type>
+  : BaseMessage<Type> & { payload: Payload };
 
-export type ConstructResponseMessage = Message<'construct-response'>;
+export type InitializeRequestMessage<T> = Message<
+  'initialize-request',
+  {
+    list: T[];
+    options?: Fuse.IFuseOptions<T>;
+    index?: Fuse.FuseIndex<T>;
+  }
+>;
+
+export type InitializeResponseMessage = Message<'initialize-response'>;
 
 export type SearchRequestMessage = Message<
   'search-request',
@@ -24,6 +34,6 @@ export type SearchRequestMessage = Message<
 
 export type SearchResponseMessage<T> = Message<'search-response', Fuse.FuseResult<T>>;
 
-export type RequestMessage = ConstructRequestMessage | SearchRequestMessage;
+export type RequestMessage<T> = InitializeRequestMessage<T> | SearchRequestMessage;
 
-export type ResponseMessage<T> = ConstructResponseMessage | SearchResponseMessage<T>;
+export type ResponseMessage<T> = InitializeResponseMessage | SearchResponseMessage<T>;
