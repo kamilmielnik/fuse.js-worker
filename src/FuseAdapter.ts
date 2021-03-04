@@ -1,5 +1,6 @@
 // TODO: if (!window.Worker)
 
+import FuseWorker from 'worker-loader!./FuseWorker';
 import { IdGenerator, poll } from './lib';
 import {
   FuseAdapterOptions,
@@ -17,7 +18,7 @@ class FuseAdapter<T> {
   private idGenerator: Generator<number> = IdGenerator();
   private options: FuseAdapterOptions;
   private resolvedPromises: Map<number, ResponseMessage<T>> = new Map();
-  private worker: Worker = new global.Worker('worker.js');
+  private worker: Worker = new FuseWorker();
 
   constructor(options?: FuseAdapterOptions) {
     this.options = { ...DEFAULT_OPTIONS, ...options };

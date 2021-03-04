@@ -11,9 +11,11 @@ import {
 
 let fuse: Fuse<any> | null = null;
 
-global.onmessage = (event: MessageEvent<RequestMessage<any>>): void => {
-  global.postMessage(reply(event.data));
-};
+const worker: Worker = self as any;
+
+worker.addEventListener('message', (event: MessageEvent<RequestMessage<any>>) => {
+  worker.postMessage(reply(event.data));
+});
 
 const reply = <T>(message: RequestMessage<T>): ResponseMessage<T> => {
   switch (message.type) {

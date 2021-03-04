@@ -43,7 +43,7 @@
   },
   "scripts": {
     "clean": "rimraf build",
-    "build": "tsc --project .",
+    "build": "webpack",
     "prettier": "prettier --list-different './src/**/*.{js,ts}'",
     "prettier:fix": "npm run prettier:js -- --write --no-list-different",
     "prebuild": "npm run clean",
@@ -55,11 +55,18 @@
     "fuse.js": "*"
   },
   "devDependencies": {
+    "@babel/core": "^7.13.8",
+    "@babel/preset-env": "^7.13.9",
+    "babel-loader": "^8.2.2",
     "fuse.js": "^6.4.6",
     "live-server": "^1.2.1",
     "np": "^7.4.0",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
-    "typescript": "^4.2.2"
+    "ts-loader": "^8.0.17",
+    "typescript": "^4.2.2",
+    "webpack": "^5.24.3",
+    "webpack-cli": "^4.5.0",
+    "worker-loader": "^3.0.8"
   }
 }

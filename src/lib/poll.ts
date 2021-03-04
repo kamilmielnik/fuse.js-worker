@@ -2,9 +2,9 @@
  * @param callback Polling will stop when callback returns false
  */
 const poll = (callback: () => boolean, time: number) => {
-  let interval = global.setInterval(() => {
+  let interval = self.setInterval(() => {
     if (!callback()) {
-      global.clearInterval(interval);
+      self.clearInterval(interval);
     }
   }, time);
 };
