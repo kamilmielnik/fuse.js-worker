@@ -48,13 +48,15 @@
     "prettier:fix": "npm run prettier:js -- --write --no-list-different",
     "prebuild": "npm run clean",
     "prerelease": "npm run build",
-    "release": "np --no-2fa"
+    "release": "np --no-2fa",
+    "start": "npm run build && live-server"
   },
   "peerDependencies": {
     "fuse.js": "*"
   },
   "devDependencies": {
     "fuse.js": "^6.4.6",
+    "live-server": "^1.2.1",
     "np": "^7.0.0",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
