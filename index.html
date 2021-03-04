@@ -10,10 +10,15 @@
             const $query = document.getElementById('query');
             const $list = document.getElementById('list');
             const $result = document.getElementById('result');
+            let fuseAdapter;
 
             $query.addEventListener('keydown', async (event) => {
+                if (fuseAdapter) {
+                    fuseAdapter.terminate();
+                }
+
                 const list = $list.value.split(',').map(value => value.trim());
-                const fuseAdapter = new window.FuseAdapter();
+                fuseAdapter = new window.FuseAdapter();
                 await fuseAdapter.initialize(list);
                 const result = await fuseAdapter.search(event.target.value);
 
