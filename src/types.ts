@@ -16,9 +16,9 @@ type Message<Type extends string, Payload = void> = Payload extends void
 export type InitializeRequestMessage<T> = Message<
   'initialize-request',
   {
+    index?: Fuse.FuseIndex<T>;
     list: T[];
     options?: Fuse.IFuseOptions<T>;
-    index?: Fuse.FuseIndex<T>;
   }
 >;
 

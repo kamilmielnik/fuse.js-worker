@@ -4,6 +4,7 @@ import FuseWorker from 'worker-loader!./FuseWorker';
 import { IdGenerator, poll } from './lib';
 import {
   FuseAdapterOptions,
+  InitializeRequestMessage,
   RequestMessage,
   ResponseMessage,
   SearchRequestMessage,
@@ -25,6 +26,18 @@ class FuseAdapter<T> {
     this.worker.onmessage = (event: MessageEvent<ResponseMessage<T>>) => {
       this.resolvedPromises.set(event.data.id, event.data);
     };
+  }
+
+  public async initialize(
+    list: InitializeRequestMessage<T>['payload']['list'],
+    options?: InitializeRequestMessage<T>['payload']['options'],
+    index?: InitializeRequestMessage<T>['payload']['index'],
+  ): Promise<void> {
+    this.postMessage({
+      id: this.idGenerator.next().value,
+      type: 'initialize-request',
+      payload: { index, list, options },
+    });
   }
 
   public async search(
