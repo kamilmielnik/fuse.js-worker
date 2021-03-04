@@ -50,7 +50,11 @@
     "prerelease": "npm run build",
     "release": "np --no-2fa"
   },
+  "peerDependencies": {
+    "fuse.js": "*"
+  },
   "devDependencies": {
+    "fuse.js": "^6.4.6",
     "np": "^7.0.0",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
