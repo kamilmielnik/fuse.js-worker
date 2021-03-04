@@ -47,10 +47,11 @@ const replySearch = <T>(message: SearchRequestMessage): SearchResponseMessage<T>
   }
 
   const result = fuse.search(message.payload.pattern, message.payload.options);
+  const payload = (result as any) as Fuse.FuseResult<T>;
 
   return {
     id: message.id,
     type: 'search-response',
-    payload: (result as any) as Fuse.FuseResult<T>,
+    payload,
   };
 };
