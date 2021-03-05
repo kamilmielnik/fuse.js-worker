@@ -1,6 +1,6 @@
 {
   "name": "fuse.js-worker",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Fuse.js in Web Worker for great user experience",
   "keywords": [
     "fuse.js",
