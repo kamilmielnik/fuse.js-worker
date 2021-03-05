@@ -28,7 +28,7 @@ module.exports = {
     extensions: ['.ts', '.js'],
   },
   output: {
-    publicPath: '/build/',
+    publicPath: '/',
     filename: 'index.js',
     path: path.resolve(__dirname, 'build/'),
   },
