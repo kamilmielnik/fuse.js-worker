@@ -28,9 +28,11 @@ module.exports = {
     extensions: ['.ts', '.js'],
   },
   output: {
-    publicPath: '/',
     filename: 'index.js',
-    path: path.resolve(__dirname, 'build/'),
+    globalObject: 'this',
+    libraryTarget: 'umd',
+    path: path.resolve(__dirname, 'build'),
+    publicPath: '/',
   },
   stats: {
     children: true,
