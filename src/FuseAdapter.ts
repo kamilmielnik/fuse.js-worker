@@ -42,7 +42,7 @@ class FuseAdapter<T> {
 
   public async search(
     pattern: SearchRequestMessage['payload']['pattern'],
-    options: SearchRequestMessage['payload']['options'],
+    options?: SearchRequestMessage['payload']['options'],
   ): Promise<SearchResponseMessage<T>['payload']> {
     const id = this.idGenerator.next().value;
 
