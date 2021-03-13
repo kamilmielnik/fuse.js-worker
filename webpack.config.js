@@ -1,13 +1,8 @@
-const fs = require('fs');
 const path = require('path');
-
-const packageJson = fs.readFileSync('./package.json', 'utf-8');
-const { peerDependencies } = JSON.parse(packageJson);
 
 module.exports = {
   mode: 'production',
   entry: './src/index.ts',
-  externals: Object.fromEntries(Object.keys(peerDependencies).map((name) => [name, name])),
   module: {
     rules: [
       {
