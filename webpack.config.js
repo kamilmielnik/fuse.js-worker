@@ -2,7 +2,10 @@ const path = require('path');
 
 module.exports = {
   mode: 'production',
-  entry: './src/index.ts',
+  entry: {
+    FuseAdapter: './src/FuseAdapter.ts',
+    FuseWorker: './src/FuseWorker.ts',
+  },
   module: {
     rules: [
       {
@@ -28,11 +31,10 @@ module.exports = {
     extensions: ['.ts', '.js'],
   },
   output: {
-    filename: 'index.js',
+    filename: '[name].js',
     globalObject: 'this',
-    libraryTarget: 'umd',
     path: path.resolve(__dirname, 'build'),
-    publicPath: '/',
+    publicPath: '/build/',
   },
   stats: {
     children: true,

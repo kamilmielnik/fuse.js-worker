@@ -81,3 +81,8 @@ class FuseAdapter<T> {
 }
 
 export default FuseAdapter;
+
+(() => {
+  // @ts-ignore
+  window.FuseAdapter = FuseAdapter;
+})();

@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>fuse.js-worker - example</title>
-    <script type="module" src="./build/index.js"></script>
+    <script type="module" src="./build/FuseAdapter.js"></script>
+    <script type="module" src="./build/FuseWorker.js"></script>
     <script>
         window.addEventListener('load', () => {
             const $query = document.getElementById('query');
@@ -12,7 +13,7 @@
             const $result = document.getElementById('result');
             let fuseAdapter;
 
-            $query.addEventListener('keydown', async (event) => {
+            $query.addEventListener('input', async (event) => {
                 if (fuseAdapter) {
                     fuseAdapter.terminate();
                 }
