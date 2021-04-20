@@ -5,25 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>fuse.js-worker - example</title>
     <script type="module" src="./build/FuseAdapter.js"></script>
-    <script type="module" src="./build/FuseWorker.js"></script>
     <script>
+      function getList() {
+        const $list = document.getElementById('list');
+        const list = $list.value.split(',').map((value) => value.trim());
+        return list;
+      }
+
+      function showResults(results) {
+        const $results = document.getElementById('results');
+        $results.innerHTML = JSON.stringify(results, null, 2);
+      }
+
       window.addEventListener('load', () => {
         const $query = document.getElementById('query');
-        const $list = document.getElementById('list');
-        const $result = document.getElementById('result');
-        let fuseAdapter;
+        let fuseAdapter = null;
 
         $query.addEventListener('input', async (event) => {
           if (fuseAdapter) {
             fuseAdapter.terminate();
           }
 
-          const list = $list.value.split(',').map((value) => value.trim());
           fuseAdapter = new window.FuseAdapter();
-          await fuseAdapter.initialize(list);
-          const result = await fuseAdapter.search(event.target.value);
-
-          $result.innerHTML = JSON.stringify(result, null, 2);
+          await fuseAdapter.initialize(getList());
+          const results = await fuseAdapter.search(event.target.value);
+          showResults(results);
         });
       });
     </script>
@@ -37,6 +43,6 @@ apple,pear,plum,blueberry,strawberry,raspberry
     <input id="query" type="text" />
 
     <h3>Result</h3>
-    <pre id="result"></pre>
+    <pre id="results"></pre>
   </body>
 </html>
